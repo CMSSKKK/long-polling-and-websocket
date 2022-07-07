@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,5 +24,15 @@ public class CoffeeController {
         DeferredResult<String> output = new DeferredResult<>();
         barista.execute(() -> output.setResult(coffeeService.makeCoffee(coffeeName)));
         return output;
+    }
+
+    @GetMapping("/greeting")
+    public ResponseBodyEmitter emitterTest() throws IOException, InterruptedException {
+        ResponseBodyEmitter responseBodyEmitter = new ResponseBodyEmitter();
+        responseBodyEmitter.send("hello");
+        Thread.sleep(5000L);
+        responseBodyEmitter.send("welcome!");
+        responseBodyEmitter.complete();
+        return responseBodyEmitter;
     }
 }

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Coffee {
 
-    AMERICANO("Americano", 4500L, 1000L),
+    AMERICANO("Americano", 4500L, 10000L),
     CAFFE_LATTE("CaffeLatte", 5000L, 3000L),
     MIX_COFFEE("커피는 맥심", 1000L, 500L);
 
